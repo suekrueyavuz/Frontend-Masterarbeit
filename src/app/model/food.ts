@@ -1,3 +1,10 @@
 export interface Food {
-    name:string;
+    food_name:string;
+    photo: {
+        thumb:string;
+    };
+    calorie:number;
+    protein:number;
+    carbohydrate:number;
+    fat:number;
 }

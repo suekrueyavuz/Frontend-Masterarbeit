@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Food } from '../model/food';
 
@@ -13,15 +13,23 @@ export class CalorieService {
   constructor(private http: HttpClient) { }
 
   autocomplete(nahrungsmittel:string) {
-    const headers = this.getHeaders();
-    return this.http.get<Food>(this.BASE_URL + 'search/instant?query=' + nahrungsmittel, {headers});
+    return this.http.get<Food>(this.BASE_URL + 'search/instant?query=' + nahrungsmittel, this.getHeaders());
+  }
+
+  getNutrients(nahrungsmittel:string) {
+    const body = {
+      query: nahrungsmittel,
+    };
+    return this.http.post<any>(this.BASE_URL + 'natural/nutrients', JSON.stringify(body), this.getHeaders());
   }
 
   getHeaders() {
-    const headers = {
-      'x-app-id': '090dae06',
-      'x-app-key': '0718f36e649948a9cb4dc897363634a7'
-    }
-    return headers;
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'x-app-id': this.APP_ID,
+      'x-app-key': this.APP_KEY,
+      'x-remote-user-id': '0'
+    });
+    return { headers: headers };
   }
 }
