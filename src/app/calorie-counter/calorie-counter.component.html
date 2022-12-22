@@ -1,19 +1,30 @@
-<div class="margin">
-    <h5>Breakfast</h5>
-    <hr>
-    <app-autocomplete (totalCalorieChange)="updateNutrients($event)"></app-autocomplete>
+<div style="display: flex; justify-content: center; margin-top: 2rem; margin-bottom: 2rem;">
+    <button pButton pRipple type="button" (click)="updateDate(-1)" icon="pi pi-angle-left" class="p-button-rounded p-button-text"></button>
+    <span style="margin-left: 1rem; margin-right: 1rem; margin-top: 0.7rem;">{{date}}</span>
+    <button pButton pRipple type="button" (click)="updateDate(+1)" icon="pi pi-angle-right" class="p-button-rounded p-button-text"></button>
 </div>
-<div class="margin">
-    <h5>Lunch</h5>
-    <hr>
-    <app-autocomplete (totalCalorieChange)="updateNutrients($event)"></app-autocomplete>
+<div class="card" style="margin: 0 2rem 2rem 2rem;">
+    <div class="margin">
+        <h5>Breakfast</h5>
+        <hr>
+        <app-autocomplete (totalCalorieChange)="updateNutrientsEvent($event)" 
+        [date]="date" [meal]="'BREAKFAST'" [selectedNahrungsmittelList]="entriesBreakfast"></app-autocomplete>
+    </div>
+    <div class="margin">
+        <h5>Lunch</h5>
+        <hr>
+        <app-autocomplete (totalCalorieChange)="updateNutrientsEvent($event)" 
+        [date]="date" [meal]="'LUNCH'" [selectedNahrungsmittelList]="entriesLunch"></app-autocomplete>
+    </div>
+    <div class="margin" style="margin-bottom: 2rem;">
+        <h5>Dinner</h5>
+        <hr>
+        <app-autocomplete (totalCalorieChange)="updateNutrientsEvent($event)" 
+        [date]="date" [meal]="'DINNER'" [selectedNahrungsmittelList]="entriesDinner"></app-autocomplete>
+    </div>
 </div>
-<div class="margin">
-    <h5>Dinner</h5>
-    <hr>
-    <app-autocomplete (totalCalorieChange)="updateNutrients($event)"></app-autocomplete>
-</div>
-<div class="margin" style="margin-bottom: 3rem;" *ngIf="total_fat != 0 || total_carbohydrate != 0 || total_protein != 0">
+
+<div class="margin" style="margin-bottom: 3rem;" *ngIf="totalFat != 0 || totalCarbohydrate != 0 || totalProtein != 0">
     <h5>Total</h5>
     <hr>
     <p-chart type="pie" width="300" height="300" [data]="chartData"></p-chart>

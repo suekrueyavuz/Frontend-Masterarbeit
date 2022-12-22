@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Food } from '../model/food';
+import { BackendService } from '../services/backend.service';
 
 @Component({
   selector: 'app-calorie-counter',
@@ -7,22 +8,63 @@ import { Food } from '../model/food';
   styleUrls: ['./calorie-counter.component.css']
 })
 export class CalorieCounterComponent implements OnInit {
-  total_fat:number = 0;
-  total_carbohydrate:number = 0;
-  total_protein:number = 0;
+  totalFat:number = 0;
+  totalCarbohydrate:number = 0;
+  totalProtein:number = 0;
   chartData:any;
 
-  constructor() { }
+  date:string = '';
+
+  entriesBreakfast:Food[] = [];
+  entriesLunch:Food[] = [];
+  entriesDinner:Food[] = [];
+
+  constructor(private backendService: BackendService) { }
 
   ngOnInit(): void {
-    this.updateChartData();
+    this.date = this.getTodaysDate();
+    this.getEntriesAndSetNutrients();
   }
 
-  updateNutrients(event:Food) {
-    this.total_fat += event.fat;
-    this.total_carbohydrate += event.carbohydrate;
-    this.total_protein += event.protein;
-    this.updateChartData();
+  getEntriesAndSetNutrients() {
+    this.entriesBreakfast = [];
+    this.entriesLunch = [];
+    this.entriesDinner = [];
+    this.totalCarbohydrate = 0;
+    this.totalFat = 0;
+    this.totalProtein = 0;
+    this.backendService.getEntries(this.date).subscribe(value => {
+      if(value !== null) {
+        this.entriesBreakfast = this.getEntryFromMeal(value.foods.BREAKFAST);      
+        this.entriesLunch = this.getEntryFromMeal(value.foods.LUNCH);
+        this.entriesDinner = this.getEntryFromMeal(value.foods.DINNER);
+      }
+      this.updateChartData(); 
+    })
+  }
+
+  getEntryFromMeal(meal:any) {
+    if(meal !== undefined) {
+      this.setNutrientsFromMeal(meal);
+      return meal;
+    }
+    return [];
+  }
+
+  setNutrientsFromMeal(meal:any) {
+    for(let i=0; i<meal.length; i++) {
+      this.totalCarbohydrate += meal[i].carbohydrate;
+      this.totalFat += meal[i].fat;
+      this.totalProtein += meal[i].protein;
+    }
+  }
+
+  updateNutrientsEvent(event:Food) {
+  //  this.totalFat += event.fat;
+  //  this.totalCarbohydrate += event.carbohydrate;
+  //  this.totalProtein += event.protein;
+  //  this.updateChartData();
+    this.getEntriesAndSetNutrients();
   }
 
   updateChartData() {
@@ -30,7 +72,7 @@ export class CalorieCounterComponent implements OnInit {
       labels: ['Carbohydrate','Protein','Fat'],
       datasets: [
           {
-              data: [this.total_carbohydrate, this.total_protein, this.total_fat],
+              data: [this.totalCarbohydrate, this.totalProtein, this.totalFat],
               backgroundColor: [
                   "#42A5F5",
                   "#66BB6A",
@@ -44,6 +86,25 @@ export class CalorieCounterComponent implements OnInit {
           }
       ]
     };
+  }
+
+  updateDate(offset:number) {
+    const date = new Date(this.date);
+    const offsetDate = new Date(date);
+    offsetDate.setDate(offsetDate.getDate() + offset);
+    var day = String(offsetDate.getDate()).padStart(2, '0');
+    var month = String(offsetDate.getMonth() + 1).padStart(2, '0');
+    var year = offsetDate.getFullYear();
+    this.date = year + '-' + month + '-' + day;
+    this.getEntriesAndSetNutrients();
+  }
+
+  getTodaysDate() {
+    var today = new Date();
+    var day = String(today.getDate()).padStart(2, '0');
+    var month = String(today.getMonth() + 1).padStart(2, '0');
+    var year = today.getFullYear();
+    return year + '-' + month + '-' + day;  
   }
 
 }
