@@ -26,6 +26,10 @@ export class BackendService {
     return this.http.post<any>(this.BASE_URL + 'entry?date=' + date + '&meal=' + meal, JSON.stringify(body), this.getHeaders());
   }
 
+  removeFood(foodName: string, date: string, meal: string) {
+    return this.http.delete<any>(this.BASE_URL + 'entry?date=' + date + '&meal=' + meal + '&foodName=' + foodName, this.getHeaders());
+  }
+
   getHeaders() {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json'

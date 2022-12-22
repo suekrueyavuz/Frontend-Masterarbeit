@@ -59,7 +59,7 @@ export class CalorieCounterComponent implements OnInit {
     }
   }
 
-  updateNutrientsEvent(event:Food) {
+  updateNutrientsEvent() {
   //  this.totalFat += event.fat;
   //  this.totalCarbohydrate += event.carbohydrate;
   //  this.totalProtein += event.protein;

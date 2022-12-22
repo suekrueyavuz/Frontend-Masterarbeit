@@ -11,10 +11,9 @@ import { CalorieService } from 'src/app/services/calorie.service';
 export class AutocompleteComponent implements OnInit {
   selectedNahrungsmittel?:Food;
   @Input() selectedNahrungsmittelList:Food[] = [];
-  nahrungsmittel:Food[] = [];
+  nahrungsmittelSuggestions:Food[] = [];
 
   totalCalorie:number = 0;
-
   @Output() totalCalorieChange = new EventEmitter<Food>();
   @Input() date:string = '';
   @Input() meal:string = '';
@@ -26,7 +25,7 @@ export class AutocompleteComponent implements OnInit {
   
   autocomplete(event:any) {
     this.calorieService.autocomplete(event.query).subscribe((data: any) => {
-      this.nahrungsmittel = data.common;
+      this.nahrungsmittelSuggestions = data.common;
     });    
   }
 
@@ -41,8 +40,7 @@ export class AutocompleteComponent implements OnInit {
           this.selectedNahrungsmittel.fat = data.foods[0].nf_total_fat;
           this.backendService.addFood(this.selectedNahrungsmittel, this.date, this.meal).subscribe(() => {
             if(this.selectedNahrungsmittel) {
-        //      this.selectedNahrungsmittelList.push(this.selectedNahrungsmittel);
-              this.incrementCalorie(this.selectedNahrungsmittel);
+              this.updateCalorieEvent(this.selectedNahrungsmittel.calorie);
             }
           })
         }
@@ -50,9 +48,15 @@ export class AutocompleteComponent implements OnInit {
     }
   }
 
-  incrementCalorie(nahrungsmittel:Food) {
-    this.totalCalorie += nahrungsmittel.calorie;
-    this.totalCalorieChange.emit(nahrungsmittel);
+  nahrungsmittelLoeschen(nahrungsmittel:Food) {
+    this.backendService.removeFood(nahrungsmittel.food_name, this.date, this.meal).subscribe(() => {
+      this.updateCalorieEvent(-nahrungsmittel.calorie);
+    })
+  }
+
+  updateCalorieEvent(foodCalorie:number) {
+    this.totalCalorie += foodCalorie;
+    this.totalCalorieChange.emit();
     this.selectedNahrungsmittel = null!;
   }
 
