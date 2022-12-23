@@ -11,6 +11,7 @@ export class CalorieCounterComponent implements OnInit {
   totalFat:number = 0;
   totalCarbohydrate:number = 0;
   totalProtein:number = 0;
+  totalCalorie:number = 0;
   chartData:any;
 
   date:string = '';
@@ -27,12 +28,7 @@ export class CalorieCounterComponent implements OnInit {
   }
 
   getEntriesAndSetNutrients() {
-    this.entriesBreakfast = [];
-    this.entriesLunch = [];
-    this.entriesDinner = [];
-    this.totalCarbohydrate = 0;
-    this.totalFat = 0;
-    this.totalProtein = 0;
+    this.resetAllEntries();
     this.backendService.getEntries(this.date).subscribe(value => {
       if(value !== null) {
         this.entriesBreakfast = this.getEntryFromMeal(value.foods.BREAKFAST);      
@@ -56,15 +52,22 @@ export class CalorieCounterComponent implements OnInit {
       this.totalCarbohydrate += meal[i].carbohydrate;
       this.totalFat += meal[i].fat;
       this.totalProtein += meal[i].protein;
+      this.totalCalorie += meal[i].calorie;
     }
   }
 
   updateNutrientsEvent() {
-  //  this.totalFat += event.fat;
-  //  this.totalCarbohydrate += event.carbohydrate;
-  //  this.totalProtein += event.protein;
-  //  this.updateChartData();
     this.getEntriesAndSetNutrients();
+  }
+
+  resetAllEntries() {
+    this.entriesBreakfast = [];
+    this.entriesLunch = [];
+    this.entriesDinner = [];
+    this.totalCarbohydrate = 0;
+    this.totalFat = 0;
+    this.totalProtein = 0;
+    this.totalCalorie = 0;
   }
 
   updateChartData() {
@@ -92,10 +95,16 @@ export class CalorieCounterComponent implements OnInit {
     const date = new Date(this.date);
     const offsetDate = new Date(date);
     offsetDate.setDate(offsetDate.getDate() + offset);
+    
+    var daysBetween = this.getNumberOfDaysBetweenDates(offsetDate);
+    if(daysBetween < -10 || daysBetween > 0) {
+      return;
+    }
+
     var day = String(offsetDate.getDate()).padStart(2, '0');
     var month = String(offsetDate.getMonth() + 1).padStart(2, '0');
     var year = offsetDate.getFullYear();
-    this.date = year + '-' + month + '-' + day;
+    this.date = year + '-' + month + '-' + day;    
     this.getEntriesAndSetNutrients();
   }
 
@@ -105,6 +114,12 @@ export class CalorieCounterComponent implements OnInit {
     var month = String(today.getMonth() + 1).padStart(2, '0');
     var year = today.getFullYear();
     return year + '-' + month + '-' + day;  
+  }
+
+  getNumberOfDaysBetweenDates(date:Date) {
+    var today = new Date(this.getTodaysDate());
+    var differenceTime = date.getTime() - today.getTime();
+    return differenceTime / (1000*3600*24);
   }
 
 }
