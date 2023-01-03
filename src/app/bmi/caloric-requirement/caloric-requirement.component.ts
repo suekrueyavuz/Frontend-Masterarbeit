@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { CaloricRequirementService } from '../services/caloric-requirement.service';
+import { CaloricRequirementService } from 'src/app/services/caloric-requirement.service';
+import { CaloricRequirement } from '../../model/caloric-requirement';
 
 @Component({
   selector: 'app-caloric-requirement',
@@ -10,6 +11,8 @@ import { CaloricRequirementService } from '../services/caloric-requirement.servi
 export class CaloricRequirementComponent implements OnInit {
   public form:FormGroup;
   submitted: boolean = false;
+  showResult: boolean = false;
+  caloricRequirement:number = 0;
 
   activityLevels: any[] = [];
 
@@ -34,7 +37,12 @@ export class CaloricRequirementComponent implements OnInit {
   ngOnInit(): void {}
 
   getCaloricRequirements() {
+    if(this.form.valid) {
+      this.showResult = true;
+    }
     this.submitted = true;
+    const person = new CaloricRequirement(this.form.value.gender, this.form.value.age, this.form.value.weight, this.form.value.height, this.form.value.activityLevel.pal);
+    this.caloricRequirement = this.caloricRequirementService.getCaloricRequirements(person);
   }
 
 }

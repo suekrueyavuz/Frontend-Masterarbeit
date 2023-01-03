@@ -62,3 +62,7 @@
         </div>
     </p-card>
 </div>
+
+<div *ngIf="showResult && form.valid" style="margin:auto; width: 60%; margin-top: 2rem;">
+    <app-caloric-requirement-result></app-caloric-requirement-result>
+</div>

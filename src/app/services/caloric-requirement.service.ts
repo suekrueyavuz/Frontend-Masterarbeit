@@ -8,11 +8,19 @@ export class CaloricRequirementService {
 
   constructor() { }
 
-  getCaloricRequirementForMale(person:CaloricRequirement) {
+  getCaloricRequirements(person:CaloricRequirement) {
+    if(person.gender === 'Male') {
+      return this.getCaloricRequirementForMale(person);
+    } else {
+      return this.getCaloricRequirementForFemale(person);
+    }
+  }
+
+  private getCaloricRequirementForMale(person:CaloricRequirement) {
     return (66.5 + (13.75 * person.weight) + (5.003 * person.height) - (6.75 * person.age)) * person.pal;
   }
 
-  getCaloricRequirementForFemale(person:CaloricRequirement) {
+  private getCaloricRequirementForFemale(person:CaloricRequirement) {
     return (655.1 + (9.563 * person.weight) + (1.85 * person.height) - (4.676 * person.age)) * person.pal;
   }
 }
