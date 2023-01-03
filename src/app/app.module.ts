@@ -21,6 +21,7 @@ import { HeaderComponent } from './header/header.component';
 import { QuizComponent } from './quiz/quiz.component';
 import { CaloricRequirementComponent } from './caloric-requirement/caloric-requirement.component';
 import { CaloricRequirementResultComponent } from './caloric-requirement/caloric-requirement-result/caloric-requirement-result.component';
+import { BmiCalculatorComponent } from './caloric-requirement/bmi-calculator/bmi-calculator.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { CaloricRequirementResultComponent } from './caloric-requirement/caloric
     HeaderComponent,
     QuizComponent,
     CaloricRequirementComponent,
-    CaloricRequirementResultComponent
+    CaloricRequirementResultComponent,
+    BmiCalculatorComponent
   ],
   imports: [
     BrowserModule,

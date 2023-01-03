@@ -65,4 +65,5 @@
 <hr>
 <div *ngIf="caloricRequirement && form.valid" style="margin:auto; width: 70%; margin-top: 2rem;">
     <app-caloric-requirement-result [caloricRequirement]="caloricRequirement"></app-caloric-requirement-result>
+    <app-bmi-calculator [person]="person"></app-bmi-calculator>
 </div>

@@ -12,6 +12,7 @@ export class CaloricRequirementComponent implements OnInit {
   public form:FormGroup;
   submitted: boolean = false;
   caloricRequirement?:number;
+  person?:CaloricRequirement;
 
   activityLevels: any[] = [];
 
@@ -40,8 +41,8 @@ export class CaloricRequirementComponent implements OnInit {
     if(!this.form.valid) {
       return;
     }
-    const person = new CaloricRequirement(this.form.value.gender, this.form.value.age, this.form.value.weight, this.form.value.height, this.form.value.activityLevel.pal);
-    this.caloricRequirement = this.caloricRequirementService.getCaloricRequirements(person);
+    this.person = new CaloricRequirement(this.form.value.gender, this.form.value.age, this.form.value.weight, this.form.value.height, this.form.value.activityLevel.pal);
+    this.caloricRequirement = this.caloricRequirementService.getCaloricRequirements(this.person);
   }
 
 }

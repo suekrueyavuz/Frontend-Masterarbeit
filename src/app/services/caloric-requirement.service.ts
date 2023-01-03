@@ -23,4 +23,8 @@ export class CaloricRequirementService {
   private getCaloricRequirementForFemale(person:CaloricRequirement) {
     return (655.1 + (9.563 * person.weight) + (1.85 * person.height) - (4.676 * person.age)) * person.pal;
   }
+
+  getBmi(person:CaloricRequirement) {
+    return person.weight / ((person.height/100) * 2);
+  }
 }
