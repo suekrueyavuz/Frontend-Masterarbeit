@@ -7,6 +7,10 @@ import {TableModule} from 'primeng/table';
 import {ButtonModule} from 'primeng/button';
 import {ChartModule} from 'primeng/chart';
 import {MenubarModule} from 'primeng/menubar';
+import {KeyFilterModule} from 'primeng/keyfilter';
+import {RadioButtonModule} from 'primeng/radiobutton';
+import {CardModule} from 'primeng/card';
+import {DropdownModule} from 'primeng/dropdown';
 
 import { AppComponent } from './app.component';
 import { CalorieCounterComponent } from './calorie-counter/calorie-counter.component';
@@ -14,8 +18,8 @@ import { FormsModule } from '@angular/forms';
 import { AutocompleteComponent } from './calorie-counter/autocomplete/autocomplete.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HeaderComponent } from './header/header.component';
-import { HomeComponent } from './home/home.component';
 import { QuizComponent } from './quiz/quiz.component';
+import { CaloricRequirementComponent } from './caloric-requirement/caloric-requirement.component';
 
 @NgModule({
   declarations: [
@@ -23,8 +27,8 @@ import { QuizComponent } from './quiz/quiz.component';
     CalorieCounterComponent,
     AutocompleteComponent,
     HeaderComponent,
-    HomeComponent,
-    QuizComponent
+    QuizComponent,
+    CaloricRequirementComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +40,11 @@ import { QuizComponent } from './quiz/quiz.component';
     ButtonModule,
     ChartModule,
     AppRoutingModule,
-    MenubarModule
+    MenubarModule,
+    KeyFilterModule,
+    RadioButtonModule,
+    CardModule,
+    DropdownModule
   ],
   providers: [],
   bootstrap: [AppComponent]

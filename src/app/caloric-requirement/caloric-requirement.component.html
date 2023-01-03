@@ -1,0 +1,59 @@
+<div style="margin:auto; width: 60%; margin-top: 2rem;">
+    <p-card header="Caloric Requirement">
+        <div class="row">
+            <div class="col">
+                Gender: 
+            </div>
+            <div class="col">
+                <p-radioButton name="gender" value="Male" [(ngModel)]="gender" inputId="male" [style]="{'margin-right': '1rem'}"></p-radioButton>
+                <label for="male">Male</label>
+                <br>
+                <p-radioButton name="gender" value="Female" [(ngModel)]="gender" inputId="female" [style]="{'margin-right': '1rem'}"></p-radioButton>
+            <label for="female">Female</label>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col">
+                Age:
+            </div>
+            <div class="col">
+                <input type="text" pInputText [(ngModel)]="age" [pKeyFilter]="'int'">
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col">
+                Body weight:
+           </div>
+            <div class="col">
+                <input type="text" pInputText [(ngModel)]="weight" [pKeyFilter]="'num'">
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col">
+                Height:
+            </div>
+            <div class="col">
+                <input type="text" pInputText [(ngModel)]="height" [pKeyFilter]="'num'">
+            </div>
+            </div>
+        <hr>
+        <div class="row">
+            <div class="col">
+                Physical activity level:
+            </div>
+            <div class="col">
+                <p-dropdown [options]="activityLevels" [(ngModel)]="selectedActivityLevel" placeholder="Select activity level" optionLabel="activityLevel"
+                autoWidth="false"></p-dropdown>
+            </div>
+        </div>
+        <div class="row" style="margin-top: 2rem;">
+            <div class="col"></div>
+            <div class="col">
+                <p-button label="Submit"></p-button>
+            </div>
+        </div>
+    </p-card>
+</div>
