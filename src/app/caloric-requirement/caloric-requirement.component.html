@@ -1,5 +1,5 @@
-<div style="margin:auto; width: 60%; margin-top: 2rem;">
-    <p-card header="Caloric Requirement">
+<div style="margin:auto; width: 70%; margin-top: 2rem;">
+    <p-card header="Caloric Requirement Calculator">
         <div [formGroup]="form">
             <div class="row">
                 <div class="col">
@@ -56,13 +56,13 @@
             <div class="row" style="margin-top: 2rem;">
                 <div class="col"></div>
                 <div class="col">
-                    <p-button label="Submit" (onClick)="getCaloricRequirements()"></p-button>
+                    <p-button label="Calculate" (onClick)="getCaloricRequirements()"></p-button>
                 </div> 
             </div>
         </div>
     </p-card>
 </div>
-
-<div *ngIf="showResult && form.valid" style="margin:auto; width: 60%; margin-top: 2rem;">
-    <app-caloric-requirement-result></app-caloric-requirement-result>
+<hr>
+<div *ngIf="caloricRequirement && form.valid" style="margin:auto; width: 70%; margin-top: 2rem;">
+    <app-caloric-requirement-result [caloricRequirement]="caloricRequirement"></app-caloric-requirement-result>
 </div>

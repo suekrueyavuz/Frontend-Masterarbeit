@@ -19,9 +19,8 @@ import { AutocompleteComponent } from './calorie-counter/autocomplete/autocomple
 import { AppRoutingModule } from './app-routing.module';
 import { HeaderComponent } from './header/header.component';
 import { QuizComponent } from './quiz/quiz.component';
-import { BmiComponent } from './bmi/bmi.component';
-import { CaloricRequirementComponent } from './bmi/caloric-requirement/caloric-requirement.component';
-import { CaloricRequirementResultComponent } from './bmi/caloric-requirement/caloric-requirement-result/caloric-requirement-result.component';
+import { CaloricRequirementComponent } from './caloric-requirement/caloric-requirement.component';
+import { CaloricRequirementResultComponent } from './caloric-requirement/caloric-requirement-result/caloric-requirement-result.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +30,6 @@ import { CaloricRequirementResultComponent } from './bmi/caloric-requirement/cal
     HeaderComponent,
     QuizComponent,
     CaloricRequirementComponent,
-    BmiComponent,
     CaloricRequirementResultComponent
   ],
   imports: [

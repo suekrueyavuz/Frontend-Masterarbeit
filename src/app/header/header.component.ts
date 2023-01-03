@@ -11,7 +11,7 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.header = [
-      {label: 'Caloric Requirements', icon: '', routerLink: ['/']},
+      {label: 'Caloric Requirement', icon: '', routerLink: ['/']},
       {label: 'Calorie Calculator', icon: '', routerLink: ['/calculator']},
       {label: 'Nutrition Quiz', icon: '', routerLink: ['/quiz']}
     ]
