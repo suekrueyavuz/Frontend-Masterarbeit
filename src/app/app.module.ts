@@ -14,7 +14,7 @@ import {DropdownModule} from 'primeng/dropdown';
 
 import { AppComponent } from './app.component';
 import { CalorieCounterComponent } from './calorie-counter/calorie-counter.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
 import { AutocompleteComponent } from './calorie-counter/autocomplete/autocomplete.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HeaderComponent } from './header/header.component';
@@ -33,6 +33,7 @@ import { CaloricRequirementComponent } from './caloric-requirement/caloric-requi
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     AutoCompleteModule,
     BrowserAnimationsModule,
