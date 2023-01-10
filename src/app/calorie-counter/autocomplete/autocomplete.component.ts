@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Food } from 'src/app/model/food';
-import { BackendService } from 'src/app/services/backend.service';
+import { EntryService } from 'src/app/services/entry.service';
 import { CalorieService } from 'src/app/services/calorie.service';
 
 @Component({
@@ -19,7 +19,7 @@ export class AutocompleteComponent implements OnInit {
   @Input() meal:string = '';
 
   constructor(private calorieService: CalorieService,
-              private backendService: BackendService) {}
+              private entryService: EntryService) {}
 
   ngOnInit(): void {}
   
@@ -38,7 +38,7 @@ export class AutocompleteComponent implements OnInit {
           this.selectedNahrungsmittel.carbohydrate = data.foods[0].nf_total_carbohydrate;
           this.selectedNahrungsmittel.protein = data.foods[0].nf_protein;
           this.selectedNahrungsmittel.fat = data.foods[0].nf_total_fat;
-          this.backendService.addFood(this.selectedNahrungsmittel, this.date, this.meal).subscribe(() => {
+          this.entryService.addFood(this.selectedNahrungsmittel, this.date, this.meal).subscribe(() => {
             if(this.selectedNahrungsmittel) {
               this.updateCalorieEvent(this.selectedNahrungsmittel.calorie);
             }
@@ -49,7 +49,7 @@ export class AutocompleteComponent implements OnInit {
   }
 
   nahrungsmittelLoeschen(nahrungsmittel:Food) {
-    this.backendService.removeFood(nahrungsmittel.food_name, this.date, this.meal).subscribe(() => {
+    this.entryService.removeFood(nahrungsmittel.food_name, this.date, this.meal).subscribe(() => {
       this.updateCalorieEvent(-nahrungsmittel.calorie);
     })
   }

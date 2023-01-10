@@ -6,7 +6,7 @@ import { Food } from '../model/food';
 @Injectable({
   providedIn: 'root'
 })
-export class BackendService {
+export class EntryService {
   BASE_URL = 'http://localhost:8080/';
 
   constructor(private http: HttpClient) { }

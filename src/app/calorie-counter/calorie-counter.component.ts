@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Food } from '../model/food';
-import { BackendService } from '../services/backend.service';
+import { EntryService } from '../services/entry.service';
 
 @Component({
   selector: 'app-calorie-counter',
@@ -20,7 +20,7 @@ export class CalorieCounterComponent implements OnInit {
   entriesLunch:Food[] = [];
   entriesDinner:Food[] = [];
 
-  constructor(private backendService: BackendService) { }
+  constructor(private entryService: EntryService) { }
 
   ngOnInit(): void {
     this.date = this.getTodaysDate();
@@ -29,7 +29,7 @@ export class CalorieCounterComponent implements OnInit {
 
   getEntriesAndSetNutrients() {
     this.resetAllEntries();
-    this.backendService.getEntries(this.date).subscribe(value => {
+    this.entryService.getEntries(this.date).subscribe(value => {
       if(value !== null) {
         this.entriesBreakfast = this.getEntryFromMeal(value.foods.BREAKFAST);      
         this.entriesLunch = this.getEntryFromMeal(value.foods.LUNCH);
