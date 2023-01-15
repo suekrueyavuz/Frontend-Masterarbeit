@@ -5,19 +5,19 @@
 </div>
 <div class="card" style="margin: 0 2rem 2rem 2rem;">
     <div class="margin">
-        <h5>Breakfast</h5>
+        <h5><mark>Breakfast</mark></h5>
         <hr>
         <app-autocomplete (totalCalorieChange)="updateNutrientsEvent()" 
         [date]="date" [meal]="'BREAKFAST'" [selectedNahrungsmittelList]="entriesBreakfast"></app-autocomplete>
     </div>
     <div class="margin">
-        <h5>Lunch</h5>
+        <h5><mark>Lunch</mark></h5>
         <hr>
         <app-autocomplete (totalCalorieChange)="updateNutrientsEvent()" 
         [date]="date" [meal]="'LUNCH'" [selectedNahrungsmittelList]="entriesLunch"></app-autocomplete>
     </div>
     <div class="margin" style="margin-bottom: 2rem;">
-        <h5>Dinner</h5>
+        <h5><mark>Dinner</mark></h5>
         <hr>
         <app-autocomplete (totalCalorieChange)="updateNutrientsEvent()" 
         [date]="date" [meal]="'DINNER'" [selectedNahrungsmittelList]="entriesDinner"></app-autocomplete>
@@ -25,9 +25,9 @@
 </div>
 
 <div class="margin" style="margin-bottom: 3rem; text-align: center;" *ngIf="totalFat != 0 || totalCarbohydrate != 0 || totalProtein != 0">
-    <h5>Total</h5>
+    <h5 style="background-color: rgb(216, 216, 216);">Total</h5>
     <hr>
-    Your calorie count for the whole day is {{totalCalorie}} calories.
+    Your calorie count for the whole day is <b>{{totalCalorie}}</b> calories.
     <br><br>
     <p-chart type="pie" width="300" height="300" [data]="chartData"></p-chart>
 </div>

@@ -10,7 +10,7 @@
                 </div>
             </ng-template>
         </p-autoComplete>
-        <button pButton label="Hinzufügen" (click)="nahrungsmittelHinzufuegen()" class="p-button-sm" style="margin-left: 1rem;"></button>
+        <button pButton label="Add" (click)="nahrungsmittelHinzufuegen()" class="p-button-sm" style="margin-left: 1rem;"></button>
     </div>
     <div class="col-7" *ngIf="selectedNahrungsmittelList.length !== 0">
             <p-table [value]="selectedNahrungsmittelList" [tableStyle]="{'min-width': '40rem'}">

@@ -43,8 +43,6 @@ export class CaloricRequirementComponent implements OnInit {
     }
     this.person = new CaloricRequirement(this.form.value.gender, this.form.value.age, this.form.value.weight, this.form.value.height, this.form.value.activityLevel.pal);
     this.caloricRequirementService.getCaloricRequirements(this.person).subscribe(value => {
-      console.log("request");
-      
       this.caloricRequirement = value;
     });
   }
